@@ -17,19 +17,12 @@
 
 <div class="container">
     <form  action="/converter" >
-
-            <div class=" row mb-3">
-                <label for="usd" class="form-label">USD</label>
-                <input type="text" value="${usd}" class="form-control" id="usd" name="usd" >
-            </div>
-
-            <div class="row mb-3 ">
-                <label  class="form-label">VND</label>
-                <input class="form-control" type="text" value="${vnd}" aria-label="readonly input example" readonly>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Change</button>
-
+        <div ><h1>Sandwich Condiments</h1></div>
+        <input name="condiment" type="checkbox" value="Lettuce">Lettuce
+        <input name="condiment" type="checkbox" value="Tomato">Tomato
+        <input name="condiment" type="checkbox" value="Mustard">Mustard
+        <input name="condiment" type="checkbox" value="Sprouts">Sprouts
+        <button type="submit"></button>
     </form>
 </div>
 

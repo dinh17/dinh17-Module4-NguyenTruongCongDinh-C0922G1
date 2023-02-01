@@ -15,26 +15,22 @@
 <body>
 
 
-<div class="container">
-    <form  action="/converter" >
 
-            <div class=" row mb-3">
-                <label for="usd" class="form-label">USD</label>
-                <input type="text" value="${usd}" class="form-control" id="usd" name="usd" >
-            </div>
+    <form  action="/calculate" >
+        <div ><h1>Calculator</h1></div>
+        <input  type="text"  value="${num1}"  name="number1" >
+        <input  type="text"  value="${num2}"  name="number2" >
+        <input  type="text"  value="${result}"  name="result" readonly>
 
-            <div class="row mb-3 ">
-                <label  class="form-label">VND</label>
-                <input class="form-control" type="text" value="${vnd}" aria-label="readonly input example" readonly>
-            </div>
 
-            <button type="submit" class="btn btn-primary">Change</button>
+
+
 
     </form>
-</div>
 
 
 
+ <h3> ${condiment} </h3>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
