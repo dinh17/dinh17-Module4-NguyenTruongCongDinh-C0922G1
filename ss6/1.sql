@@ -1,0 +1,1 @@
+SELECT * FROM blog_manager.hibernate_sequence;

@@ -14,5 +14,7 @@ public interface IBlogService {
     void deleteById(int id);
 
     boolean update(Blog blog);
+    void add(Blog blog);
 
+    Boolean existsByTitle(String title);
 }

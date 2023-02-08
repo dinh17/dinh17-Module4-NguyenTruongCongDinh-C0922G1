@@ -18,6 +18,9 @@
     <input th:field="*{dateCreated}" type="date">
     <p>Category: </p>
     <input th:field="*{category}" type="text">
+    <select th:field="*{post}">
+        <option th:each="item: ${postList}" th:value="${item.id}" th:text="${item.name}"></option>
+    </select>
     <button type="submit">ADD</button>
 </form>
 </body>

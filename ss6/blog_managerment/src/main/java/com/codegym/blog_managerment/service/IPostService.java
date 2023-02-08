@@ -1,6 +1,6 @@
-package com.codegym.blog_update.service;
+package com.codegym.blog_managerment.service;
 
-import com.codegym.blog_update.model.Post;
+import com.codegym.blog_managerment.model.Post;
 
 import java.util.List;
 

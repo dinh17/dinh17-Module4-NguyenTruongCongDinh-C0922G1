@@ -1,4 +1,4 @@
-package com.codegym.blog_update.model;
+package com.codegym.blog_managerment.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

@@ -29,7 +29,7 @@ public class BlogService implements IBlogService {
     public boolean update(Blog blog) {
         try {
             if (!iBlogRepository.existsById(blog.getId())) {
-                throw new SQLException();
+                throw new SQLException("Title is already exists");
             } else {
                 iBlogRepository.save(blog);
                 return true;
@@ -39,6 +39,12 @@ public class BlogService implements IBlogService {
             return false;
         }
     }
+    public void add(Blog blog){
+        iBlogRepository.save(blog);
+    }
 
+    public Boolean existsByTitle(String title){
+        return iBlogRepository.existsByTitle(title);
+    }
 
 }

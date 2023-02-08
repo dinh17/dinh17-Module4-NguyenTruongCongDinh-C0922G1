@@ -1,7 +1,7 @@
-package com.codegym.blog_update.service;
+package com.codegym.blog_managerment.service;
 
-import com.codegym.blog_update.model.Post;
-import com.codegym.blog_update.repository.IPostRepository;
+import com.codegym.blog_managerment.model.Post;
+import com.codegym.blog_managerment.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
