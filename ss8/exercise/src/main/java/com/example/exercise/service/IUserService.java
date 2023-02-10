@@ -1,2 +1,7 @@
-package com.example.exercise.service;public interface IUserService {
+package com.example.exercise.service;
+
+import com.example.exercise.model.User;
+
+public interface IUserService {
+    void add(User user);
 }
