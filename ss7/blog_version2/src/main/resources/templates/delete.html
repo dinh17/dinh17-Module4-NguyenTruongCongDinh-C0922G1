@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Delete</title>
 </head>
 <body>
-$END$
+<form action="/delete" method="post" th:object="${blog}">
+<table>
+    <tr>
+        <td><input type="hidden" th:field="*{id}" readonly/></td>
+    </tr>
+
+    <tr>
+        <td>Title:</td>
+        <td><input type="text" th:field="*{title}" readonly/></td>
+    </tr>
+
+
+    <tr>
+        <td>Category:</td>
+        <td>
+            <span th:if="${blog.category}" th:text="${blog.category.name}"></span>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>Writer:</td>
+        <td><input type="text" th:field="*{author}" readonly/></td>
+    </tr>
+    <tr>
+        <td>Content:</td>
+        <td><textarea th:field="*{content}" readonly></textarea></td>
+    </tr>
+    <tr>
+        <td>Date:</td>
+        <td>
+            <input type="date" th:field="*{dateWrite}" readonly />
+        </td>
+    </tr>
+
+
+</table>
+
+    <button type="submit">Delete</button>
+</form>
 </body>
 </html>

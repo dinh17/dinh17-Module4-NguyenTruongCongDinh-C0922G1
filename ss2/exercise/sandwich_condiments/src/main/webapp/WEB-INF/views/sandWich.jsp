@@ -15,19 +15,19 @@
 <body>
 
 
-<div class="container">
-    <form  action="/converter" >
+
+    <form  action="/cv" >
         <div ><h1>Sandwich Condiments</h1></div>
         <input name="condiment" type="checkbox" value="Lettuce">Lettuce
         <input name="condiment" type="checkbox" value="Tomato">Tomato
         <input name="condiment" type="checkbox" value="Mustard">Mustard
         <input name="condiment" type="checkbox" value="Sprouts">Sprouts
-        <button type="submit"></button>
+        <button type="submit"> Save</button>
     </form>
-</div>
 
 
 
+ <h3> ${condiment} </h3>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

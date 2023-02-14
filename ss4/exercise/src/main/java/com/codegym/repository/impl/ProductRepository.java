@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class ProductRepository implements IProductRepository {
 
@@ -13,11 +14,11 @@ public class ProductRepository implements IProductRepository {
 
     static {
         productList = new ArrayList<>();
-        productList.add(new Product(1,"Nokia1080",1000000,"vip","Nokia"));
-        productList.add(new Product(2,"Iphone8",2000000,"vip1","Iphone"));
-        productList.add(new Product(3,"SamSung1975",3000000,"vip pro","SamSung"));
-        productList.add(new Product(4,"IphoneX",4000000,"vip2","Iphone"));
-        productList.add(new Product(5,"IphoneXIII",5000000,"vip3","Iphone"));
+        productList.add(new Product(1, "Nokia1080", 1000000, "vip", "Nokia"));
+        productList.add(new Product(2, "Iphone8", 2000000, "vip1", "Iphone"));
+        productList.add(new Product(3, "SamSung1975", 3000000, "vip pro", "SamSung"));
+        productList.add(new Product(4, "IphoneX", 4000000, "vip2", "Iphone"));
+        productList.add(new Product(5, "IphoneXIII", 5000000, "vip3", "Iphone"));
     }
 
     @Override
@@ -32,9 +33,9 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findById(int id) {
-        for (Product p: productList
-             ) {
-            if(id == p.getId()){
+        for (Product p : productList
+        ) {
+            if (id == p.getId()) {
                 return p;
             }
         }
@@ -43,8 +44,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public int findIndexById(int id) {
-        for (int i = 0; i < productList.size() ; i++) {
-            if(id == productList.get(i).getId()){
+        for (int i = 0; i < productList.size(); i++) {
+            if (id == productList.get(i).getId()) {
                 return i;
             }
         }
@@ -53,7 +54,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public void update(Product product) {
-        productList.set(findIndexById(product.getId()),product);
+        productList.set(findIndexById(product.getId()), product);
     }
 
     @Override
@@ -63,13 +64,14 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findByName(String name) {
+
         List<Product> productList1 = new ArrayList<>();
-        for (Product p: productList) {
-            if(p.getName().contains(name)){
+        for (Product p : productList) {
+            if (p.getName().contains(name)) {
                 productList1.add(p);
             }
         }
         return productList1;
-    }
 
+    }
 }

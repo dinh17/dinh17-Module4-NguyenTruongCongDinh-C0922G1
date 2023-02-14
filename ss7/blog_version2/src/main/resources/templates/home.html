@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
 </head>
 <body>
-$END$
+<a href="/add">Add</a>
+<p style="color: green" th:text="${mess}"></p>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>stt</th>
+        <th>title</th>
+        <th>Category</th>
+        <th>author</th>
+        <th>content</th>
+        <th>DateWrite</th>
+        <th>Delete</th>
+        <th>Edit</th>
+        <th>View</th>
+    </tr>
+    <tr th:each="blog, status :${blogList}">
+        <td th:text="${blogList.number * 5 + status.count}"></td>
+        <td th:text="${blog.title}"></td>
+        <td th:if="${blog.category}" th:text="${blog.category.name}"></td>\
+        <td th:unless="${blog.category}">Tiểu thuyết</td>
+        <td th:text="${blog.author}"></td>
+        <td th:text="${blog.content}"></td>
+        <td th:text="${blog.dateWrite}"></td>
+        <td><a th:href="@{/delete/__${blog.id}__}">Delete</a></td>
+        <td><a th:href="@{/edit/__${blog.id}__}">Edit</a></td>
+        <td><a th:href="@{/view/__${blog.id}__}">View</a> </td>
+
+    </tr>
+    <div>
+        <a th:href="@{'/'(page=${blogList.number - 1}, search=${search})}"
+           th:if="${blogList.hasPrevious()}">Previous</a>
+        <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
+        <a th:href="@{'/'(page=${blogList.number + 1}, search=${search})}" th:if="${blogList.hasNext()}">Next</a>
+    </div>
+</table>
 </body>
 </html>

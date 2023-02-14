@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: OS
@@ -14,24 +15,39 @@
 </head>
 <body>
 
+<form action="/translate">
 
-<div class="container">
-    <form  action="/converter" >
+        <input class="form-control me-2" name="word" value="${word}" type="search" placeholder="Search"
+               aria-label="Search">
+        <div class="mb-3">
+            <label class="form-label">Nghĩa Tiếng Việt</label>
+            <input class="form-control" type="text" value="${meaning}" aria-label="readonly input example" readonly>
+        </div>
+        <div class="col-lg-3">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
 
-            <div class=" row mb-3">
-                <label for="usd" class="form-label">USD</label>
-                <input type="text" value="${usd}" class="form-control" id="usd" name="usd" >
-            </div>
+        <c:if test="${map.size() > 0}">
+        <table class="table table-striped table-bordered" id="dictionaryMap">
+            <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Word</th>
+                <th scope="col">Meaning</th>
+            </tr>
+            </thead>
 
-            <div class="row mb-3 ">
-                <label  class="form-label">VND</label>
-                <input class="form-control" type="text" value="${vnd}" aria-label="readonly input example" readonly>
-            </div>
 
-            <button type="submit" class="btn btn-primary">Change</button>
+            <c:forEach var="word" items="${map.keySet()}" varStatus="stt">
+            <tr>
+                <td>${stt.count}</td>
+                <td>${word}</td>
+                <td>${map.get(word)}</td>
+            </tr>
+            </c:forEach>
+            </c:if>
 
-    </form>
-</div>
+</form>
 
 
 

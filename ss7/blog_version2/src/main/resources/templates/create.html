@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Add</title>
 </head>
 <body>
-$END$
+<form action="/save" method="post" th:object="${blog}">
+    <table>
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{title}" /></td>
+        </tr>
+
+
+        <tr>
+            <td>Category:</td>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="category : ${categoryList}" th:value="${category.id}" th:text="${category.name}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Writer:</td>
+            <td><input type="text" th:field="*{author}" /></td>
+        </tr>
+        <tr>
+            <td>Content:</td>
+            <td><textarea th:field="*{content}"></textarea></td>
+        </tr>
+
+
+        <tr>
+            <td>Date:</td>
+            <td>
+                <input type="date" th:field="*{dateWrite}" />
+            </td>
+        </tr>
+
+
+    </table>
+
+    <button type="submit">Save</button>
+</form>
 </body>
 </html>

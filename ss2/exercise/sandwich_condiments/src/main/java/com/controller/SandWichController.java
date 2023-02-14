@@ -17,7 +17,7 @@ public class SandWichController {
     }
 
     @GetMapping("/cv")
-    public String getSpice(@RequestParam(value = "condiment" , defaultValue = "ăn gia vị đi")  String[] condiment, Model model){
+    public String getSpice(@RequestParam(value = "condiment" , defaultValue = "no condiments")  String[] condiment, Model model){
         if (condiment.length >0){
              model.addAttribute("condiment", Arrays.toString(condiment));
         }

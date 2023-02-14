@@ -60,8 +60,12 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public String search(Model model, String name ){
-        model.addAttribute("productList",productService.findByName(name));
+    public String search(Model model, String name){
+        if(productService.findByName(name).isEmpty()){
+            model.addAttribute("mess","tim khong thay");
+        }else {
+            model.addAttribute("productList", productService.findByName(name));
+        }
         return "/list";
     }
 
