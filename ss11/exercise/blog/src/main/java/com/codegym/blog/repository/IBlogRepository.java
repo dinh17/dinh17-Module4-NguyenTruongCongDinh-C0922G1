@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 public interface IBlogRepository extends JpaRepository<Blog,Integer> {
-    @Query(value = "select * from blog_jpa.blog where title like concat('%',:title,'%')",nativeQuery = true)
+    @Query(value = "select * from blog_jpa2.blog where title like concat('%',:title,'%')",nativeQuery = true)
     Page<Blog> findBlogByTitle(@Param("title") String title, Pageable pageable);
 
     @Query(value = "select * from blog where category_id = :categoryId",nativeQuery = true)
