@@ -1,48 +1,41 @@
 package com.example.case_study.model.employee;
 
-
-import com.example.case_study.model.contract.Contract;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Employee {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int id ;
-    @Column(columnDefinition ="varchar(45)")
-    private  String name;
-    @Column(columnDefinition ="date")
-    private String dateOfBirth ;
-    @Column(columnDefinition =" varchar(45)",unique = true)
-    private String id_card ;
-    private double salary ;
-    @Column(columnDefinition = "varchar(45)",unique = true)
-    private String phone_number ;
-    @Column(columnDefinition = "varchar(45)",unique = true)
-    private String email ;
-    @Column(columnDefinition = "varchar(45)")
-    private String address ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    private String dateOfBirth;
+    private String idCard;
+    private Double salary;
+
+    private String phoneNumber;
+    private String email;
+    private String address;
+
     @ManyToOne
-    @JoinColumn(name = "position_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
+
+
     @ManyToOne
-    @JoinColumn(name = "education_degree_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id")
     private EducationDegree educationDegree;
+
     @ManyToOne
-    @JoinColumn(name = "division_id",nullable = false,referencedColumnName = "id")
-    private Division division ;
+    @JoinColumn(referencedColumnName = "id")
+    private Division division;
 
-    private String user;
-    @OneToMany(mappedBy = "employee")
-    private Set<Contract> contracts;
-
-
+    @OneToOne
+    private User user;
 
     public Employee() {
-
     }
 
     public int getId() {
@@ -69,36 +62,28 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getId_card() {
-        return id_card;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setId_card(String id_card) {
-        this.id_card = id_card;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
-    public Division getDivision() {
-        return division;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setDivision(Division division) {
-        this.division = division;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -133,19 +118,28 @@ public class Employee {
         this.educationDegree = educationDegree;
     }
 
-    public String getUser() {
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Set<Contract> getContracts() {
-        return contracts;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setContracts(Set<Contract> contracts) {
-        this.contracts = contracts;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
+
 }

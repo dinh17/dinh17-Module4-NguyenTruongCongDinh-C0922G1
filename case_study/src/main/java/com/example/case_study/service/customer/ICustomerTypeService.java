@@ -5,6 +5,6 @@ import com.example.case_study.model.customer.CustomerType;
 import java.util.List;
 
 public interface ICustomerTypeService {
-    List<CustomerType> findAll();
+    List<CustomerType> getAllCustomerType();
 
 }

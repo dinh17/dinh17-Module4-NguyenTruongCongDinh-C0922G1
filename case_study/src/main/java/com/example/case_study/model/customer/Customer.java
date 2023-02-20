@@ -1,34 +1,31 @@
 package com.example.case_study.model.customer;
 
-
-import com.example.case_study.model.contract.Contract;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name="customer_type_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "id")
     private CustomerType customerType;
-    @Column(columnDefinition = "varchar(45)",unique = true)
-    private String name ;
-    @Column(columnDefinition ="date")
-    private String dateOfBirth ;
-    private boolean gender;
-    @Column(columnDefinition = "varchar(45)",unique = true)
+    private String name;
+    private String dateOfBirth;
+    private int gender;
+
+    @Column(columnDefinition = "varchar(255) unique")
     private String idCard;
-    @Column(columnDefinition = "varchar(45)",unique = true)
+
+    @Column(columnDefinition = "varchar(255) unique")
     private String phoneNumber;
-    @Column(columnDefinition = "varchar(45)",unique = true)
+
+    @Column(columnDefinition = "varchar(255) unique")
     private String email;
-    @Column(columnDefinition = "varchar(45)")
     private String address;
-    @OneToMany(mappedBy = "customer")
-    private Set<Contract> contracts;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
 
     public Customer() {
     }
@@ -65,11 +62,11 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -105,11 +102,11 @@ public class Customer {
         this.address = address;
     }
 
-    public Set<Contract> getContracts() {
-        return contracts;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setContracts(Set<Contract> contracts) {
-        this.contracts = contracts;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

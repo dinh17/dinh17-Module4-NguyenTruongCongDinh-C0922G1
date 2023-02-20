@@ -1,14 +1,15 @@
 package com.example.case_study.service.customer;
 
-import com.example.case_study.dto.customer.CustomerDto;
-import com.example.case_study.model.customer.Customer;
 
-import java.util.List;
-import java.util.Map;
+import com.example.case_study.model.customer.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 public interface ICustomerService {
-    List<Customer> findAll();
-    void add(Customer customer);
-    Map<String,String> getError(CustomerDto customerDto);
-    boolean existsByIdCardAndPhoneNumberAndEmail(String idCard,String phoneNumber,String email);
+    Page<Customer> searchName(String name,String email, int customerTypeId, Pageable pageable);
+    Page<Customer> searchName(String name,String email, Pageable pageable);
+    boolean addNewCustomer(Customer customer);
+    boolean editCustomer(Customer customer);
+    Customer findById(int id);
 }

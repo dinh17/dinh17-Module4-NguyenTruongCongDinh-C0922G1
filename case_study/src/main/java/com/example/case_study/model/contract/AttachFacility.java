@@ -1,29 +1,32 @@
 package com.example.case_study.model.contract;
 
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class AttachFacility {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(columnDefinition = "varchar(45)",unique = true)
-    private String name ;
-    private Double cost ;
-    @Column(columnDefinition = "varchar(45)",unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
+    private Double cost;
     private String unit;
-    @Column(columnDefinition = "varchar(45)",unique = true)
     private String status;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
+
+    @OneToMany(mappedBy = "attachFacility")
+    private List<ContractDetail> contractDetailList;
 
     public AttachFacility() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,5 +60,21 @@ public class AttachFacility {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public List<ContractDetail> getContractDetailList() {
+        return contractDetailList;
+    }
+
+    public void setContractDetailList(List<ContractDetail> contractDetailList) {
+        this.contractDetailList = contractDetailList;
     }
 }

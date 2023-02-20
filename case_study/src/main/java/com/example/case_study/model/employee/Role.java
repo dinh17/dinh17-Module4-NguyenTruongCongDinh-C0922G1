@@ -1,10 +1,9 @@
-package com.example.case_study.model.facility;
+package com.example.case_study.model.employee;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-public class RentType {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,10 +12,7 @@ public class RentType {
     @Column(columnDefinition = "boolean default false")
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "rentType")
-    private List<Facility> facilityList;
-
-    public RentType() {
+    public Role() {
     }
 
     public int getId() {
@@ -33,14 +29,6 @@ public class RentType {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Facility> getFacilityList() {
-        return facilityList;
-    }
-
-    public void setFacilityList(List<Facility> facilityList) {
-        this.facilityList = facilityList;
     }
 
     public boolean isDeleted() {

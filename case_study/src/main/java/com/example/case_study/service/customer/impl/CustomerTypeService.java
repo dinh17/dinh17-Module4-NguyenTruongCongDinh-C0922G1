@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class CustomerTypeService implements ICustomerTypeService {
     @Autowired
-  private ICustomerTypeRepository customerTypeRepository;
+    private ICustomerTypeRepository customerTypeRepository;
 
     @Override
-    public List<CustomerType> findAll() {
+    public List<CustomerType> getAllCustomerType() {
         return customerTypeRepository.findAll();
     }
 }

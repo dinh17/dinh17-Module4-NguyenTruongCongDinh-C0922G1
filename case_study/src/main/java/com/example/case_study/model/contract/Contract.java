@@ -1,76 +1,74 @@
 package com.example.case_study.model.contract;
 
+
+
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.employee.Employee;
 import com.example.case_study.model.facility.Facility;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Contract {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id ;
-    @Column(columnDefinition ="date")
-    private String start_date ;
-    @Column(columnDefinition ="date")
-    private String end_Date ;
-    private double deposit ;
-    @ManyToOne
-    @JoinColumn(name = "employee_id",nullable = false,referencedColumnName = "id")
-    private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false,referencedColumnName = "id")
-    private Customer customer;
-    @ManyToOne
-    @JoinColumn(name = "facility_id",nullable = false,referencedColumnName = "id")
-    private Facility facility;
-    @OneToMany(mappedBy = "contract")
-    private Set<ContractDetail> contractDetail;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    private String startDate;
+    private String endDate;
+    private Double deposit;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
+    private Facility facility;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
+
+    @OneToOne(mappedBy = "contract")
+    private ContractDetail contractDetail;
 
     public Contract() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getStart_date() {
-        return start_date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getEnd_Date() {
-        return end_Date;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_Date(String end_Date) {
-        this.end_Date = end_Date;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public double getDeposit() {
+    public Double getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(double deposit) {
+    public void setDeposit(Double deposit) {
         this.deposit = deposit;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Customer getCustomer() {
@@ -81,6 +79,14 @@ public class Contract {
         this.customer = customer;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     public Facility getFacility() {
         return facility;
     }
@@ -89,11 +95,11 @@ public class Contract {
         this.facility = facility;
     }
 
-    public Set<ContractDetail> getContractDetail() {
-        return contractDetail;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setContractDetail(Set<ContractDetail> contractDetail) {
-        this.contractDetail = contractDetail;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

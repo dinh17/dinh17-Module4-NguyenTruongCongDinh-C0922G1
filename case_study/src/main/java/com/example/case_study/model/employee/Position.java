@@ -1,18 +1,20 @@
 package com.example.case_study.model.employee;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Position {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "varchar(45)")
     private String name;
-    @OneToMany(mappedBy = "position")
-    private Set<Employee> employees;
 
+    @OneToMany(mappedBy = "position")
+    private List<Employee> employeeList;
+
+    @Column(columnDefinition = "boolean default false")
+private boolean isDeleted;
     public Position() {
     }
 
@@ -32,11 +34,19 @@ public class Position {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

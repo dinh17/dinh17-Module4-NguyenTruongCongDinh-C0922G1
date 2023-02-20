@@ -1,17 +1,23 @@
 package com.example.case_study.model.facility;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class FacilityType {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(columnDefinition = "varchar(45)",unique = true)
     private String name;
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
+
     @OneToMany(mappedBy = "facilityType")
-    private Set<Facility> facilities;
+    private List<Facility> facilityList;
+
+    public FacilityType() {
+    }
+
     public int getId() {
         return id;
     }
@@ -28,11 +34,19 @@ public class FacilityType {
         this.name = name;
     }
 
-    public Set<Facility> getFacilities() {
-        return facilities;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setFacilities(Set<Facility> facilities) {
-        this.facilities = facilities;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public List<Facility> getFacilityList() {
+        return facilityList;
+    }
+
+    public void setFacilityList(List<Facility> facilityList) {
+        this.facilityList = facilityList;
     }
 }

@@ -1,34 +1,27 @@
 package com.example.case_study.model.facility;
 
-import javax.persistence.*;
+import javax.validation.constraints.Min;
 
-@Entity
-public class Facility {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FacilityDto {
     private Integer id;
     private String name;
+    @Min(value = 1,message = "Diện tích của dịch vụ phải là một số dương")
     private Double area;
+    @Min(value = 1,message = "Gía phải là một số dương")
     private Double cost;
+    @Min(value = 1,message = "Số người tối đa phải là một số dương")
     private Integer maxPeople;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
     private RentType rentType;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
     private FacilityType facilityType;
-
     private String standardRoom;
     private String descriptionOtherConvenience;
+    @Min(value = 1,message = "Diện tích bể bơi phải là một số dương")
     private Double poolArea;
+    @Min(value = 1,message = "Số tầng phải là một số dương")
     private Integer numberOfFloor;
     private String facilityFree;
-    @Column(columnDefinition = "boolean default false")
-    private boolean isDeleted;
 
-    public Facility() {
+    public FacilityDto() {
     }
 
     public Integer getId() {
@@ -125,13 +118,5 @@ public class Facility {
 
     public void setFacilityFree(String facilityFree) {
         this.facilityFree = facilityFree;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
     }
 }

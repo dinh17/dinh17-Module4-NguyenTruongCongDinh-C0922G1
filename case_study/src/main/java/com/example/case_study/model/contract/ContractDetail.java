@@ -1,21 +1,24 @@
 package com.example.case_study.model.contract;
 
-
 import javax.persistence.*;
 
 @Entity
 public class ContractDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int id ;
-    private int quantity ;
-    @ManyToOne
-    @JoinColumn(name = "contract_id",nullable = false,referencedColumnName = "id")
-    private Contract contract ;
-    @ManyToOne
-    @JoinColumn(name="attach_facility_id",nullable = false,referencedColumnName = "id")
-    private AttachFacility attachFacility ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    @OneToOne
+    private Contract contract;
+
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id")
+    private AttachFacility attachFacility;
+
+    private Integer quantity;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isDeleted;
 
     public ContractDetail() {
     }
@@ -26,14 +29,6 @@ public class ContractDetail {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public Contract getContract() {
@@ -50,5 +45,21 @@ public class ContractDetail {
 
     public void setAttachFacility(AttachFacility attachFacility) {
         this.attachFacility = attachFacility;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
