@@ -27,7 +27,7 @@ public class BlogRestController {
     @GetMapping("/categories")
     public ResponseEntity<List<Category>> getCategoryList(){
         List<Category> categoryList = categoryService.findAll();
-        if(categoryList.isEmpty()){
+            if(categoryList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(categoryList,HttpStatus.OK);

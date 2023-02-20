@@ -1,0 +1,1 @@
+SELECT * FROM furama_module4.contract_detail;

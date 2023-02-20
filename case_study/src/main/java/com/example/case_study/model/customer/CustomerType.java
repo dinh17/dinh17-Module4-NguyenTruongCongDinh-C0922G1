@@ -8,7 +8,7 @@ public class CustomerType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(columnDefinition = "varchar(45)")
+    @Column(columnDefinition = "varchar(45)",unique = true)
     private String name;
 
     public int getId() {

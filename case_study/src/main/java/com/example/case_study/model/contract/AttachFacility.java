@@ -8,7 +8,6 @@ public class AttachFacility {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     @Column(columnDefinition = "varchar(45)",unique = true)
     private String name ;
     private Double cost ;

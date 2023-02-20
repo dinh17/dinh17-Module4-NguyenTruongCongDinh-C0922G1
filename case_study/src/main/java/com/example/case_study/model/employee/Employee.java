@@ -18,7 +18,7 @@ public class Employee {
     private String dateOfBirth ;
     @Column(columnDefinition =" varchar(45)",unique = true)
     private String id_card ;
-    private String salary ;
+    private double salary ;
     @Column(columnDefinition = "varchar(45)",unique = true)
     private String phone_number ;
     @Column(columnDefinition = "varchar(45)",unique = true)
@@ -40,19 +40,6 @@ public class Employee {
     private Set<Contract> contracts;
 
 
-    public Employee(String name, String dateOfBirth, String id_card, String salary, String phone_number, String email, String address, Position position, EducationDegree educationDegree, String user, Set<Contract> contracts) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.id_card = id_card;
-        this.salary = salary;
-        this.phone_number = phone_number;
-        this.email = email;
-        this.address = address;
-        this.position = position;
-        this.educationDegree = educationDegree;
-        this.user = user;
-        this.contracts = contracts;
-    }
 
     public Employee() {
 
@@ -90,12 +77,20 @@ public class Employee {
         this.id_card = id_card;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public Division getDivision() {
+        return division;
+    }
+
+    public void setDivision(Division division) {
+        this.division = division;
     }
 
     public String getPhone_number() {

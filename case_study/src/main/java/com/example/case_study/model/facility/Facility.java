@@ -10,7 +10,7 @@ public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(columnDefinition = "varchar(45)")
+    @Column(columnDefinition = "varchar(45)",unique = true)
     private String name;
     private int area;
     private Double cost;

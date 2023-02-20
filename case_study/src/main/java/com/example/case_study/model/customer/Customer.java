@@ -17,7 +17,7 @@ public class Customer {
     @Column(columnDefinition = "varchar(45)",unique = true)
     private String name ;
     @Column(columnDefinition ="date")
-    private String date_of_birth ;
+    private String dateOfBirth ;
     private boolean gender;
     @Column(columnDefinition = "varchar(45)",unique = true)
     private String idCard;
@@ -57,12 +57,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getDate_of_birth() {
-        return date_of_birth;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(String date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public boolean isGender() {
