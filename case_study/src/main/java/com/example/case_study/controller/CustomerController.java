@@ -3,8 +3,8 @@ package com.example.case_study.controller;
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.customer.CustomerDto;
 import com.example.case_study.model.customer.CustomerType;
-import com.example.case_study.service.customer.ICustomerService;
-import com.example.case_study.service.customer.ICustomerTypeService;
+import com.example.case_study.service.ICustomerService;
+import com.example.case_study.service.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,9 +17,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
 
 @RequestMapping("/customer")
 @Controller
@@ -48,14 +49,18 @@ public class CustomerController {
     @PostMapping(value = "/add")
     public String addNewCustomer(@Validated CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            Pageable pageable = null;
-            Page<Customer> customerList = customerService.searchName("", "", pageable);
-            List<CustomerType> customerTypeList = customerTypeService.getAllCustomerType();
-            boolean isModal = true;
-            model.addAttribute("isModal", isModal);
-            model.addAttribute("customerList", customerList);
-            model.addAttribute("customerTypeList", customerTypeList);
-            return "/customer/list";
+            Map<String, String> errors= new HashMap<>();
+
+            bindingResult.getFieldErrors().forEach(
+                    error -> errors.put(error.getField(), error.getDefaultMessage())
+            );
+
+            String errorMsg= "";
+
+            for(String key: errors.keySet()){
+                errorMsg+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            }
+            return errorMsg;
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
@@ -67,22 +72,27 @@ public class CustomerController {
                 mess = "Đã xảy ra lỗi";
             }
             redirectAttributes.addFlashAttribute("mess", mess);
-            return "redirect:/customer/show-list";
         }
+        return "redirect:/customer/show-list";
 
     }
 
     @PostMapping(value = "/edit")
     public String editCustomer(@Validated CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            Pageable pageable = null;
-            Page<Customer> customerList = customerService.searchName("", "", pageable);
-            List<CustomerType> customerTypeList = customerTypeService.getAllCustomerType();
-            boolean isModal = true;
-            model.addAttribute("isModal", isModal);
-            model.addAttribute("customerList", customerList);
-            model.addAttribute("customerTypeList", customerTypeList);
-            return "/customer/list";
+            Map<String, String> errors= new HashMap<>();
+
+            bindingResult.getFieldErrors().forEach(
+                    error -> errors.put(error.getField(), error.getDefaultMessage())
+            );
+
+            String mess= "";
+
+            for(String key: errors.keySet()){
+                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            }
+            redirectAttributes.addFlashAttribute("mess", mess);
+            return "redirect:/customer/show-list";
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
@@ -94,12 +104,13 @@ public class CustomerController {
                 mess = "Đã xảy ra lỗi";
             }
             redirectAttributes.addFlashAttribute("mess", mess);
-            return "redirect:/customer/show-list";
+
         }
+        return "redirect:/customer/show-list";
     }
 
     @PostMapping(value = "/delete")
-    public String deleteCustomer(CustomerDto customerDto, Model model, RedirectAttributes redirectAttributes) {
+    public String deleteCustomer(CustomerDto customerDto, RedirectAttributes redirectAttributes) {
         Customer customer = customerService.findById(customerDto.getId());
         customer.setDeleted(true);
         boolean check = customerService.editCustomer(customer);

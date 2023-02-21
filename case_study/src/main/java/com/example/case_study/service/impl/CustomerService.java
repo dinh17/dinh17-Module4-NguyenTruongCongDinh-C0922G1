@@ -1,9 +1,9 @@
-package com.example.case_study.service.customer.impl;
+package com.example.case_study.service.impl;
 
 
 import com.example.case_study.model.customer.Customer;
-import com.example.case_study.repository.customer.ICustomerRepository;
-import com.example.case_study.service.customer.ICustomerService;
+import com.example.case_study.repository.ICustomerRepository;
+import com.example.case_study.service.ICustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -44,7 +44,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public boolean editCustomer(Customer customer) {
-        if (!customerRepository.findById(customer.getId()).isPresent()) {
+        if (!customerRepository.findById(customer.getId()).isPresent()||customerRepository.findByIdCard(customer.getIdCard()) != null) {
             return false;
         }
         try {

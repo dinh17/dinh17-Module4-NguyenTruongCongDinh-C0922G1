@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class RentType {
+public class
+
+RentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
