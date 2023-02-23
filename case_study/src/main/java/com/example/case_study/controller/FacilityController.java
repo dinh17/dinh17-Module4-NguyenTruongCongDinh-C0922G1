@@ -20,7 +20,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/facility")
 @Controller
@@ -54,18 +56,23 @@ public class FacilityController {
     @PostMapping(value = "/add-facility")
     public String addNewFacility(@Validated @ModelAttribute("facility") FacilityDto facilityDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Pageable pageable, Model model) {
         if (bindingResult.hasErrors()) {
-            Page<Facility> facilityPage = facilityService.searchName("", pageable);
-            List<RentType> rentTypeList = rentTypeService.getAllRentType();
-            List<FacilityType> facilityTypeList = facilityTypeService.getAllType();
-            model.addAttribute("facility", facilityDto);
-            model.addAttribute("facilityPage", facilityPage);
-            model.addAttribute("facilityTypeList", facilityTypeList);
-            model.addAttribute("rentTypeList", rentTypeList);
-            return "facility/list";
+            Map<String, String> errors= new HashMap<>();
+
+            bindingResult.getFieldErrors().forEach(
+                    error -> errors.put(error.getField(), error.getDefaultMessage())
+            );
+
+            String mess= "";
+
+            for(String key: errors.keySet()){
+                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            }
+            redirectAttributes.addFlashAttribute("mess", mess);
+            return "redirect:/customer/show-list";
         }
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);
-        boolean check = facilityService.addNewFacility(facility);
+        boolean check = facilityService.addFacility(facility);
         String mess;
         if (check) {
             mess = "Thêm mới dịch vụ thành công";
@@ -79,14 +86,19 @@ public class FacilityController {
     @PostMapping(value = "/edit-facility")
     public String editFacility(@Validated @ModelAttribute("facility") FacilityDto facilityDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Pageable pageable, Model model) {
         if (bindingResult.hasErrors()) {
-            Page<Facility> facilityPage = facilityService.searchName("", pageable);
-            List<RentType> rentTypeList = rentTypeService.getAllRentType();
-            List<FacilityType> facilityTypeList = facilityTypeService.getAllType();
-            model.addAttribute("facility", facilityDto);
-            model.addAttribute("facilityPage", facilityPage);
-            model.addAttribute("facilityTypeList", facilityTypeList);
-            model.addAttribute("rentTypeList", rentTypeList);
-            return "facility/list";
+            Map<String, String> errors= new HashMap<>();
+
+            bindingResult.getFieldErrors().forEach(
+                    error -> errors.put(error.getField(), error.getDefaultMessage())
+            );
+
+            String mess= "";
+
+            for(String key: errors.keySet()){
+                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            }
+            redirectAttributes.addFlashAttribute("mess", mess);
+            return "redirect:/customer/show-list";
         }
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class CustomerDto implements Validator {
+public class    CustomerDto implements Validator {
     private int id;
     private CustomerType customerType;
     private String dateOfBirth;

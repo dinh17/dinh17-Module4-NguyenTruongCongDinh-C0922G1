@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FacilityService implements IFacilityService {
 
@@ -20,13 +22,20 @@ public class FacilityService implements IFacilityService {
         return facilityRepository.searchName(name, pageable);
     }
 
+
+
     @Override
     public Page<Facility> searchNameAndFacilityType(String name, Integer typeId, Pageable pageable) {
         return facilityRepository.searchNameAndFacilityType(name, typeId, pageable);
     }
 
     @Override
-    public boolean addNewFacility(Facility facility) {
+    public List<Facility> getAllFacility() {
+        return facilityRepository.findAll();
+    }
+
+    @Override
+    public boolean addFacility(Facility facility) {
         if (facilityRepository.findByName(facility.getName())!=null){
             return false;
         }

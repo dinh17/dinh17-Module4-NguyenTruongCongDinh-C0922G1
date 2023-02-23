@@ -49,18 +49,18 @@ public class CustomerController {
     @PostMapping(value = "/add")
     public String addNewCustomer(@Validated CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors= new HashMap<>();
+            Map<String, String> errors = new HashMap<>();
 
             bindingResult.getFieldErrors().forEach(
                     error -> errors.put(error.getField(), error.getDefaultMessage())
             );
 
-            String errorMsg= "";
+            String mess = "";
 
-            for(String key: errors.keySet()){
-                errorMsg+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            for (String key : errors.keySet()) {
+                mess += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
             }
-            return errorMsg;
+            return mess;
         } else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
@@ -80,37 +80,36 @@ public class CustomerController {
     @PostMapping(value = "/edit")
     public String editCustomer(@Validated CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors= new HashMap<>();
+            Map<String, String> errors = new HashMap<>();
 
             bindingResult.getFieldErrors().forEach(
                     error -> errors.put(error.getField(), error.getDefaultMessage())
             );
 
-            String mess= "";
+            String mess = "";
 
-            for(String key: errors.keySet()){
-                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+            for (String key : errors.keySet()) {
+                mess += "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
             }
             redirectAttributes.addFlashAttribute("mess", mess);
             return "redirect:/customer/show-list";
-        } else {
-            Customer customer = new Customer();
-            BeanUtils.copyProperties(customerDto, customer);
-            boolean check = customerService.editCustomer(customer);
-            String mess;
-            if (check) {
-                mess = "Chỉnh sửa thành công";
-            } else {
-                mess = "Đã xảy ra lỗi";
-            }
-            redirectAttributes.addFlashAttribute("mess", mess);
-
         }
+
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
+        boolean check = customerService.editCustomer(customer);
+        String mess;
+        if (check) {
+            mess = "Chỉnh sửa thành công";
+        } else {
+            mess = "Đã xảy ra lỗi";
+        }
+        redirectAttributes.addFlashAttribute("mess", mess);
         return "redirect:/customer/show-list";
     }
 
     @PostMapping(value = "/delete")
-    public String deleteCustomer(CustomerDto customerDto, RedirectAttributes redirectAttributes) {
+    public String deleteCustomer(@ModelAttribute("customer") CustomerDto customerDto, RedirectAttributes redirectAttributes) {
         Customer customer = customerService.findById(customerDto.getId());
         customer.setDeleted(true);
         boolean check = customerService.editCustomer(customer);

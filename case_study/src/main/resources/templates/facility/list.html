@@ -12,41 +12,44 @@
 <body>
 <header th:replace="~{layout :: head}"></header>
 
-<div class="col-lg-9">
-    <div class="row">
-        <h4>Service list</h4>
+
+<div class="row">
+    <div class="d-flex justify-content-center align-content-center ">
+        <h1>Service list</h1>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addService">
+            <img src="https://img.icons8.com/offices/30/null/plus-2-math.png"/>
+        </button>
         <h2 th:text="${mess}"></h2>
+        <p style="color: red" th:text="${message}"></p>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <form class="d-flex" th:action="@{/facility/show-list}" method="get">
-                <div class="col-lg-4">
-                    <input class="form-control me-2" name="searchName" type="search" placeholder="Search by name"
-                           aria-label="Search">
-                </div>
-                <div class="col-lg-4">
-                    <select name="searchTypeId" class="form-select"
-                            aria-label="Example select with button addon">
-                        <option value="">Select facility type</option>
-                        <option th:each="facilityType: ${facilityTypeList}" th:value="${facilityType.id}"
-                                th:text="${facilityType.name}"></option>
-                    </select>
-                </div>
-                <div class="col-lg-3">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-lg-4">
-            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addService">
-                <img src="https://img.icons8.com/offices/30/null/plus-2-math.png"/>
-            </button>
-        </div>
-        <div class="col-lg-3">
-            <p style="color: red" th:text="${message}"></p>
-        </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <form class="d-flex" th:action="@{/facility/show-list}" method="get">
+            <div class="col-lg-4">
+                <input class="form-control me-2" name="searchName" type="search" placeholder="Search by name"
+                       aria-label="Search">
+            </div>
+            <div class="col-lg-4">
+                <select name="searchTypeId" class="form-select"
+                        aria-label="Example select with button addon">
+                    <option value="">Select facility type</option>
+                    <option th:each="facilityType: ${facilityTypeList}" th:value="${facilityType.id}"
+                            th:text="${facilityType.name}"></option>
+                </select>
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
     </div>
-    <div class="row">
+    <div class="col-lg-4">
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="d-flex justify-content-center align-content-center container">
         <table class="table">
             <thead>
             <tr>
@@ -95,17 +98,20 @@
             </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-center align-content-center">
         <a th:href="@{/facility/show-list(page=${facilityPage.number-1})}" th:if="${facilityPage.hasPrevious()}"
            style="text-decoration: none">Back</a>
         <a th:href="@{/facility/show-list(page=${facilityPage.number+1})}" th:if="${facilityPage.hasNext()}"
            style="text-decoration: none">Next</a>
-
-
     </div>
-</div>
-</div>
+
 </div>
 
+
+<footer th:replace="~{layout :: footer}"></footer>
 <!----------------------------------------------------------add modal-------------------------------------------------------------->
 <div class="modal fade" id="addService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -118,7 +124,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Facility type</label>
-                        <input type="text" th:field="*{facilityType}" name="facilityTypeId" id="facilityTypeId" hidden>
+                        <input type="text" th:field="*{facilityType}" name="facilityTypeId" id="facilityTypeId"
+                               hidden>
                         <button type="button" onclick="showVillaAddForm()">Villa</button>
                         <button type="button" onclick="showHouseAddForm()">House</button>
                         <button type="button" onclick="showRoomAddForm()">Room</button>
@@ -180,7 +187,8 @@
                     <div class="mb-3" id="poolArea">
                         <label class="form-label">Pool area</label>
                         <input type="text" th:field="*{poolArea}" class="form-control" name="poolArea">
-                        <div class="text text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('poolArea')}"
+                             th:errors="*{poolArea}">
                             <p>Incorrect name</p>
                         </div>
                     </div>
@@ -221,7 +229,8 @@
             <form action="/facility/edit-facility" th:object="${facility}" method="post">
                 <div class="modal-body">
                     <input type="text" th:field="*{id}" id="editId" name="editId" hidden>
-                    <input type="text" th:field="*{facilityType}" id="editFacilityType" name="editFacilityType" hidden>
+                    <input type="text" th:field="*{facilityType}" id="editFacilityType" name="editFacilityType"
+                           hidden>
                     <div class="mb-3">
                         <label class="form-label">New name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="newName" name="newName">
@@ -282,7 +291,8 @@
                         <label class="form-label">New pool area</label>
                         <input type="text" th:field="*{poolArea}" class="form-control" id="newPoolArea"
                                name="newPoolArea">
-                        <div class="text text-danger" th:if="${#fields.hasErrors('poolArea')}" th:errors="*{poolArea}">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('poolArea')}"
+                             th:errors="*{poolArea}">
                             <p>Incorrect name</p>
                         </div>
                     </div>

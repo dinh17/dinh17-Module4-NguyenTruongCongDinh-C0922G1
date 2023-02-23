@@ -44,7 +44,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public boolean editCustomer(Customer customer) {
-        if (!customerRepository.findById(customer.getId()).isPresent()||customerRepository.findByIdCard(customer.getIdCard()) != null) {
+        if (!customerRepository.findById(customer.getId()).isPresent()) {
             return false;
         }
         try {
@@ -58,6 +58,6 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer findById(int id) {
-        return customerRepository.findById(id).get();
+        return customerRepository.findById(id).orElse(null);
     }
 }
