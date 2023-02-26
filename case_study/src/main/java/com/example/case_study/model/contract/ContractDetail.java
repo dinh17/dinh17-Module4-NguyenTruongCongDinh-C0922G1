@@ -1,5 +1,7 @@
 package com.example.case_study.model.contract;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,18 +9,13 @@ public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @OneToOne
+    @ManyToOne
     private Contract contract;
-
-    @ManyToOne()
-    @JoinColumn(referencedColumnName = "id")
+    @ManyToOne
+    @JsonBackReference
     private AttachFacility attachFacility;
-
-    private Integer quantity;
-
-    @Column(columnDefinition = "boolean default false")
-    private boolean isDeleted;
+    @Column(nullable = false)
+    private int quantity;
 
     public ContractDetail() {
     }
@@ -47,19 +44,10 @@ public class ContractDetail {
         this.attachFacility = attachFacility;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-}
+    }}

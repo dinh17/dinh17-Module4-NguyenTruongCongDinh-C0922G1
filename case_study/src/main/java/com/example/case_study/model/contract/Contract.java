@@ -5,45 +5,57 @@ package com.example.case_study.model.contract;
 import com.example.case_study.model.customer.Customer;
 import com.example.case_study.model.employee.Employee;
 import com.example.case_study.model.facility.Facility;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+    private int id;
+    @Column(nullable = false, columnDefinition = "date")
     private String startDate;
+    @Column(nullable = false, columnDefinition = "date")
     private String endDate;
+    @Column(nullable = false)
     private Double deposit;
-
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
-    private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
     private Employee employee;
-
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    private Customer customer;
+    @ManyToOne
     private Facility facility;
 
-    @Column(columnDefinition = "boolean default false")
-    private boolean isDeleted;
+    public Facility getFacility() {
+        return facility;
+    }
 
-    @OneToOne(mappedBy = "contract")
-    private ContractDetail contractDetail;
+    public void setFacility(Facility facility) {
+        this.facility = facility;
+    }
+
+    @OneToMany(mappedBy = "contract")
+    @JsonBackReference
+    private Set<ContractDetail> contractDetails;
+
+    public Set<ContractDetail> getContractDetails() {
+        return contractDetails;
+    }
+
+    public void setContractDetails(Set<ContractDetail> contractDetails) {
+        this.contractDetails = contractDetails;
+    }
 
     public Contract() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -71,14 +83,6 @@ public class Contract {
         this.deposit = deposit;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -87,19 +91,13 @@ public class Contract {
         this.employee = employee;
     }
 
-    public Facility getFacility() {
-        return facility;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setFacility(Facility facility) {
-        this.facility = facility;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
 }

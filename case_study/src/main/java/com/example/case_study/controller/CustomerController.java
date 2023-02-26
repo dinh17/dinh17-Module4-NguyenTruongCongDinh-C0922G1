@@ -1,7 +1,7 @@
 package com.example.case_study.controller;
 
 import com.example.case_study.model.customer.Customer;
-import com.example.case_study.model.customer.CustomerDto;
+import com.example.case_study.dto.CustomerDto;
 import com.example.case_study.model.customer.CustomerType;
 import com.example.case_study.service.ICustomerService;
 import com.example.case_study.service.ICustomerTypeService;

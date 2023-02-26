@@ -2,31 +2,40 @@ package com.example.case_study.model.contract;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class AttachFacility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
+    @Column(nullable = false, columnDefinition = "varchar(45)")
     private String name;
+    @Column(nullable = false)
     private Double cost;
+    @Column(nullable = false, columnDefinition = "varchar(10)")
     private String unit;
+    @Column(columnDefinition = "varchar(45)")
     private String status;
-
-    @Column(columnDefinition = "boolean default false")
-    private boolean isDeleted;
-
     @OneToMany(mappedBy = "attachFacility")
-    private List<ContractDetail> contractDetailList;
+    private Set<ContractDetail> contractDetails;
+
+    public Set<ContractDetail> getContractDetails() {
+        return contractDetails;
+    }
+
+    public void setContractDetails(Set<ContractDetail> contractDetails) {
+        this.contractDetails = contractDetails;
+    }
 
     public AttachFacility() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,19 +71,4 @@ public class AttachFacility {
         this.status = status;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-    public List<ContractDetail> getContractDetailList() {
-        return contractDetailList;
-    }
-
-    public void setContractDetailList(List<ContractDetail> contractDetailList) {
-        this.contractDetailList = contractDetailList;
-    }
 }

@@ -1,8 +1,9 @@
 package com.example.case_study.service.impl;
 
-import com.example.model.contract.AttachFacility;
-import com.example.repository.contract.IAttachFacilityRepository;
-import com.example.service.contract.IAttachFacilityService;
+
+import com.example.case_study.model.contract.AttachFacility;
+import com.example.case_study.repository.contract.IAttachFacilityRepository;
+import com.example.case_study.service.IAttachFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +14,20 @@ public class AttachFacilityService implements IAttachFacilityService {
     @Autowired
     private IAttachFacilityRepository attachFacilityRepository;
 
-    @Override
-    public AttachFacility getAttachFacilityInfo(int id) {
-        return attachFacilityRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<AttachFacility> getAllAttachFacility() {
+    public List<AttachFacility> findAll() {
         return attachFacilityRepository.findAll();
     }
 
-    @Override
-    public String getNameById(Integer id) {
-        AttachFacility attachFacility = attachFacilityRepository.findById(id).orElse(null);
-        if (attachFacility != null) {
-            return attachFacility.getName();
-        }
-        return null;
+    public List<AttachFacility> findAttachFacilityByContractId(int id) {
+        return attachFacilityRepository.findAttachFacilityByContractId(id);
     }
+
+    public int getQuantity(int id, int idAf) {
+        return attachFacilityRepository.getQuantity(id, idAf);
+    }
+
+    public AttachFacility findById(int id) {
+        return attachFacilityRepository.getReferenceById(id);
+    }
+
 }
