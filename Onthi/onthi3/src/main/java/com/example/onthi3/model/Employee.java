@@ -12,9 +12,9 @@ public class Employee {
     @JoinColumn(name = "position_id",referencedColumnName ="id")
     private Position position ;
     private Double salary;
-    @Column(columnDefinition = "varchar(255) unique")
+    @Column(columnDefinition = "varchar(255) ")
     private String phoneNumber ;
-    @Column(columnDefinition = "varchar(255) unique")
+    @Column(columnDefinition = "varchar(255) ")
     private String email ;
 
     public Employee() {

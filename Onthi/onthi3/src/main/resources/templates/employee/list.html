@@ -99,8 +99,10 @@
     </div>
 </div>
 <!----------------------------------------------MODAL ADD------------------------------------------------------->
-<div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
+<div th:style="${hasErr == 'true' ? 'display: block' : 'display: none'}"
+       id="addEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    th:class="${hasErr == 'true' ? 'modal fade show' : 'modal fade'}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -111,11 +113,13 @@
 
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label" th:for="name">Name</label>
-                        <input type="text" th:field="*{name}"
-                               class="form-control" name="name" required>
+                        <label class="form-label">Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" name="name" >
+                        <div class=" text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                    </div>
                     </div>
                 </div>
+
 
                 <div class="mb-3">
                     <label class="form-label" th:for="salary">Salary</label>
@@ -158,7 +162,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"
+                            th:attr="onclick=|onCloseModal()|">Close</button>
                     <button type="Submit" class="btn btn-danger">Submit</button>
                 </div>
 
@@ -279,6 +284,11 @@
         document.getElementById("phoneNumber1").value = phoneNumber;
         document.getElementById("email1").value = email;
         document.getElementById("position1").value = position;
+    }
+    // ĐÓNG MODAL
+    function onCloseModal() {
+        document.getElementById('addEmployee').style.display = 'none';
+        window.location.href = "/employee";
     }
 </script>
 <script src="/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>

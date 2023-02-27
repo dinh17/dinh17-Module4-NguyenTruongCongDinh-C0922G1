@@ -1,8 +1,5 @@
 package com.example.onthi3.model;
-
-
 import javax.validation.constraints.NotBlank;
-
 public class EmployeeDto {
     private int id;
     @NotBlank(message = "tên không được để trống")
