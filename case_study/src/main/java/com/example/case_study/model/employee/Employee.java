@@ -1,5 +1,7 @@
 package com.example.case_study.model.employee;
 
+import com.example.case_study.model.security.User;
+
 import javax.persistence.*;
 
 @Entity

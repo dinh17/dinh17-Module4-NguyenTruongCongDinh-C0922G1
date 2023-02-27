@@ -56,19 +56,14 @@ public class FacilityController {
     @PostMapping(value = "/add-facility")
     public String addNewFacility(@Validated @ModelAttribute("facility") FacilityDto facilityDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Pageable pageable, Model model) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors= new HashMap<>();
-
-            bindingResult.getFieldErrors().forEach(
-                    error -> errors.put(error.getField(), error.getDefaultMessage())
-            );
-
-            String mess= "";
-
-            for(String key: errors.keySet()){
-                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
-            }
-            redirectAttributes.addFlashAttribute("mess", mess);
-            return "redirect:/customer/show-list";
+            Page<Facility> facilityPage = facilityService.searchName("", pageable);
+            List<RentType> rentTypeList = rentTypeService.getAllRentType();
+            List<FacilityType> facilityTypeList = facilityTypeService.getAllType();
+            model.addAttribute("facility", facilityDto);
+            model.addAttribute("facilityPage", facilityPage);
+            model.addAttribute("facilityTypeList", facilityTypeList);
+            model.addAttribute("rentTypeList", rentTypeList);
+            return "facility/list";
         }
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);
@@ -86,19 +81,14 @@ public class FacilityController {
     @PostMapping(value = "/edit-facility")
     public String editFacility(@Validated @ModelAttribute("facility") FacilityDto facilityDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Pageable pageable, Model model) {
         if (bindingResult.hasErrors()) {
-            Map<String, String> errors= new HashMap<>();
-
-            bindingResult.getFieldErrors().forEach(
-                    error -> errors.put(error.getField(), error.getDefaultMessage())
-            );
-
-            String mess= "";
-
-            for(String key: errors.keySet()){
-                mess+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
-            }
-            redirectAttributes.addFlashAttribute("mess", mess);
-            return "redirect:/customer/show-list";
+            Page<Facility> facilityPage = facilityService.searchName("", pageable);
+            List<RentType> rentTypeList = rentTypeService.getAllRentType();
+            List<FacilityType> facilityTypeList = facilityTypeService.getAllType();
+            model.addAttribute("facility", facilityDto);
+            model.addAttribute("facilityPage", facilityPage);
+            model.addAttribute("facilityTypeList", facilityTypeList);
+            model.addAttribute("rentTypeList", rentTypeList);
+            return "facility/list";
         }
         Facility facility = new Facility();
         BeanUtils.copyProperties(facilityDto, facility);

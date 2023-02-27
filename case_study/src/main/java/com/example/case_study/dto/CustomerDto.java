@@ -135,7 +135,7 @@ public class    CustomerDto implements Validator {
         for (int i = 0; i < names.length; i++) {
             firstLetter = names[i].charAt(0);
             if (firstLetter < 'A' || firstLetter > 'Z') {
-errors.rejectValue("name","name","Ký tự đầu tiên phải viết hoa");
+                errors.rejectValue("name","name","Ký tự đầu tiên phải viết hoa");
             }
         }
 

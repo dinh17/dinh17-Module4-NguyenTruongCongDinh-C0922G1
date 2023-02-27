@@ -3,12 +3,15 @@ package com.example.case_study.dto.contract;
 import com.example.case_study.model.contract.AttachFacility;
 import com.example.case_study.model.contract.Contract;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
+
 public class ContractDetailDto {
     private int id;
     private Contract contract;
     private AttachFacility attachFacility;
+    @Min(value = 1, message = "Số lượng phải là số nguyên dương")
     private int quantity;
-
     public int getId() {
         return id;
     }

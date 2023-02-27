@@ -14,9 +14,9 @@
 <!-------------------------------------------------display customer list------------------------------------------------------->
 <div class="row">
     <div class="d-flex justify-content-center align-content-center">
-    <h2 th:text="${mess}"></h2>
+        <h2 th:text="${mess}"></h2>
 
-    <h1  >Customer list</h1>
+        <h1>Customer list</h1>
         <button type="button " class="btn btn-light" data-bs-toggle="modal"
                 data-bs-target="#addCustomer">
             <img src="https://img.icons8.com/offices/30/null/plus-2-math.png"/>
@@ -25,35 +25,35 @@
     <div class="col-lg-3">
         <p style="color: red" id="message"></p>
     </div>
-    </div>
+</div>
 </div>
 <div class="row">
-<div class="d-flex  justify-content-center align-content-center">
-    <form class="d-flex" th:action="@{/customer/show-list}" method="get">
-        <div class="col-lg-3">
-            <input class="form-control me-2" name="searchName" type="search" placeholder="Search by name"
-                   aria-label="Search">
-        </div>
-        <div class="col-lg-3">
-            <input class="form-control me-2" name="searchEmail" type="search" placeholder="Search by email"
-                   aria-label="Search">
-        </div>
-        <div class="col-lg-3">
-            <select name="searchCustomerTypeId" class="form-select"
-                    aria-label="Example select with button addon" >
-                <option value="">Select customer type</option>
-                <option th:each="customerType: ${customerTypeList}" th:value="${customerType.id}"
-                        th:text="${customerType.name}"></option>
-            </select>
-            <!--            <input class="form-control me-2"  type="search"-->
-            <!--                   placeholder="Search by phone number" aria-label="Search">-->
-        </div>
-        <div class="col-lg-3">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </div>
-    </form>
+    <div class="d-flex  justify-content-center align-content-center">
+        <form class="d-flex" th:action="@{/customer/show-list}" method="get">
+            <div class="col-lg-3">
+                <input class="form-control me-2" name="searchName" type="search" placeholder="Search by name"
+                       aria-label="Search">
+            </div>
+            <div class="col-lg-3">
+                <input class="form-control me-2" name="searchEmail" type="search" placeholder="Search by email"
+                       aria-label="Search">
+            </div>
+            <div class="col-lg-3">
+                <select name="searchCustomerTypeId" class="form-select"
+                        aria-label="Example select with button addon">
+                    <option value="">Select customer type</option>
+                    <option th:each="customerType: ${customerTypeList}" th:value="${customerType.id}"
+                            th:text="${customerType.name}"></option>
+                </select>
+                <!--            <input class="form-control me-2"  type="search"-->
+                <!--                   placeholder="Search by phone number" aria-label="Search">-->
+            </div>
+            <div class="col-lg-3">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+        </form>
 
-</div>
+    </div>
 </div>
 <table class="table table-striped border" id="tableStudent">
     <thead>
@@ -103,12 +103,12 @@
 
     </tbody>
 </table>
-<div  class="row" >
+<div class="row">
     <div class="d-flex align-content-center justify-content-center">
-<a th:href="@{/customer/show-list(page=${customerList.number-1})}" th:if="${customerList.hasPrevious()}"
-   style="text-decoration: none">Back</a>
-<a th:href="@{/customer/show-list(page=${customerList.number+1})}" th:if="${customerList.hasNext()}"
-   style="text-decoration: none">Next</a>
+        <a th:href="@{/customer/show-list(page=${customerList.number-1})}" th:if="${customerList.hasPrevious()}"
+           style="text-decoration: none">Back</a>
+        <a th:href="@{/customer/show-list(page=${customerList.number+1})}" th:if="${customerList.hasNext()}"
+           style="text-decoration: none">Next</a>
     </div>
 </div>
 
@@ -138,7 +138,8 @@
                         <input type="date" th:field="*{dateOfBirth}"
                                class="form-control"
                                name="dateOfBirth " required>
-                        <div class="text text-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('dateOfBirth')}"
+                             th:errors="*{dateOfBirth}">
                             <p>Incorrect date of birth</p>
                         </div>
                     </div>
@@ -164,7 +165,8 @@
                         <label class="form-label" th:for="phoneNumber">Phone number</label>
                         <input type="text" pattern="(090\d{7})|(091\d{7})|(\(84\)\+90\d{7})|(\(84\)\+91\d{7})"
                                class="form-control" name="phoneNumber" th:field="*{phoneNumber}" required>
-                        <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                             th:errors="*{phoneNumber}">
                             <p>Incorrect phone number</p>
                         </div>
                     </div>
@@ -218,15 +220,19 @@
                     <input type="text" id="id" th:field="*{id}" name="id" hidden>
                     <div class="mb-3">
                         <label class="form-label">New name</label>
-                        <input type="text" class="form-control"  pattern="^([\p{Lu}][\p{Ll}]{1,8})(\s([\p{Lu}]|[\p{Lu}][\p{Ll}]{1,10})){0,5}$" th:field="*{name}" name="newName" id="newName">
+                        <input type="text" class="form-control"
+                               pattern="^([\p{Lu}][\p{Ll}]{1,8})(\s([\p{Lu}]|[\p{Lu}][\p{Ll}]{1,10})){0,5}$"
+                               th:field="*{name}" name="newName" id="newName">
                         <div class="text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                             <p>Incorrect name</p>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">New birthday</label>
-                        <input type="date" class="form-control" th:field="*{dateOfBirth}" name="newBirthday" id="newBirthday">
-                        <div class="text text-danger" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">
+                        <input type="date" class="form-control" th:field="*{dateOfBirth}" name="newBirthday"
+                               id="newBirthday">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('dateOfBirth')}"
+                             th:errors="*{dateOfBirth}">
                             <p>Incorrect date of birth</p>
                         </div>
                     </div>
@@ -247,14 +253,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">New phone number</label>
-                        <input type="text" class="form-control" pattern="(090\d{7})|(091\d{7})|(\(84\)\+90\d{7})|(\(84\)\+91\d{7})"  th:field="*{phoneNumber}" name="newPhoneNumber" id="newPhoneNumber">
-                        <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">
+                        <input type="text" class="form-control"
+                               pattern="(090\d{7})|(091\d{7})|(\(84\)\+90\d{7})|(\(84\)\+91\d{7})"
+                               th:field="*{phoneNumber}" name="newPhoneNumber" id="newPhoneNumber">
+                        <div class="text text-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                             th:errors="*{phoneNumber}">
                             <p>Incorrect phone number</p>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">New email</label>
-                        <input type="text" attern="[a-zA-Z]\w+@gmail\.com" class="form-control" th:field="*{email}" name="newEmail" id="newEmail">
+                        <input type="text" attern="[a-zA-Z]\w+@gmail\.com" class="form-control" th:field="*{email}"
+                               name="newEmail" id="newEmail">
                         <div class="text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                             <p>Incorrect email</p>
                         </div>
@@ -269,7 +279,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">New address</label>
-                        <input type="text" class="form-control" th:field="*{address}"  name="newAddress" id="newAddress">
+                        <input type="text" class="form-control" th:field="*{address}" name="newAddress" id="newAddress">
                         <div class="text text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">
                             <p>Incorrect Class Name</p>
                         </div>
@@ -314,7 +324,7 @@
         document.getElementById("deleteName").innerText = name;
     }
 
-    function getCustomerInfo(id, name, dateOfBirth, gender, idCard, phoneNumber, email, customerTypeId,address) {
+    function getCustomerInfo(id, name, dateOfBirth, gender, idCard, phoneNumber, email, customerTypeId, address) {
         document.getElementById("id").value = id
         document.getElementById("newName").value = name;
         document.getElementById("newBirthday").value = dateOfBirth;

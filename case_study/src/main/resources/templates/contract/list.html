@@ -117,6 +117,7 @@
                             <label th:for="endDate" class="col-sm-3 col-form-label">Số lượng</label>
                             <div class="col-sm-9">
                                 <input type="number" class="form-control" th:field="*{quantity}">
+                                <div class="text text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">
                             </div>
                         </div>
                     </div>
@@ -221,6 +222,7 @@
                 url: "/contracts/view/" + id,
                 contentType: "application/json; charset =utf-8",
                 dataType: "json",
+
                 success: function (attachFacility) {
                     if (attachFacility.length > 0) {
                         let table = ''
